@@ -30,6 +30,8 @@
 .login_title h1 {
   color: aliceblue;
   text-align: center;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.522);
+
   font-size: 50px;
 }
 .login_form{
@@ -39,15 +41,15 @@
   align-items: center;
   flex:1;
   margin-top: 500px;
-  padding: 40px 20px;
+  padding: 70px 20px;
   border-top-left-radius: 70px;
   border-top-right-radius: 70px;
   background-color: white;
   animation-name: slowup;
-  animation-duration: 1s;
+  animation-duration: .5s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-  animation-delay: 1s;
+  animation-delay: .5s;
 }
 @keyframes slowup {
   0%{
@@ -66,15 +68,14 @@
   color: rgb(0, 0, 0);
   transition: .3s linear;
   animation-name: slowups;
-  animation-duration: 1s;
+  animation-duration: .5s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-  animation-delay: 2.5s;
+  animation-delay: 1s;
   opacity: 0;
   transform: translateY(20px);
   background-color: rgb(247, 247, 247);
   padding: 10px 0px;
-  margin-top: 50px;
   border-radius: 10px;
   border: 1px solid rgb(44, 100, 255);
 }
@@ -92,20 +93,13 @@
   }
 }
 .login_form button {
-  background-color:  rgb(255, 255, 255);
-
-  border: 2px solid  rgb(44, 100, 255);
-  padding: 5px 20px;
-  font-size: 30px;
-  border-radius: 10px;
-  color: rgb(44, 100, 255);
-  transition: .3s linear;
   animation-name: slowupbtn;
-  animation-duration: 1s;
+  animation-duration: .5s;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
-  animation-delay: 3s;
+  animation-delay: 1.5s;
   opacity: 0;
+  margin-bottom: 40px;
   transform: translateY(20px);
 }
 @keyframes slowupbtn {
@@ -119,19 +113,14 @@
 
   }
 }
-.login_form button:hover{
-  color: white;  
-  background-color: rgb(44, 100, 255);
 
-
-}
 
 .login_form .form {
-  
+  width: 90%;
   display: flex;
   flex: 1;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -157,6 +146,7 @@
   font-weight: 600px;
   font-style:normal;
   border: 1px solid white;
+  box-shadow: 0 0 10px white;
 }
 .week_day_num{
 }
@@ -178,17 +168,28 @@
   padding: 10px 10px 1px 10px;
   border-radius: 15px;
   background-color: rgb(44, 100, 255);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.596);
 }
-.tt_header > p {
-  font-weight: 100;
+.tt_header > .tt_title{
+  font-weight: 500;
   padding: 5px 5px;
+  font-size: 30px;
+  text-align: center;
   color: white;
 }
 .tt_header > div {
   display: flex;
   justify-content: space-around;
 }
-
+.tt_header_prev {
+  padding: 0;
+  margin: 0;
+  align-self: self-start;
+  font-size: 30px;
+  background: none;
+  border: none;
+  color: white;
+}
 .tt_header > .meeting {
   font-size: 20px;
 }
@@ -212,6 +213,7 @@
 
 .lessons{
   display: flex;
+
   flex-direction: column;
   flex: 1;
 }
@@ -219,8 +221,6 @@
 .lessons .lesson {
   padding: 5px;
   display: flex;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.051);
-  border-top: 2px solid rgba(0, 0, 0, 0.051);
   border-radius: 1px;
   transform: translateY(15px);
   margin: 5px 0;
@@ -258,6 +258,20 @@
   display: flex;
   flex-direction: column;
   background-color: rgb(44, 100, 255);
+  box-shadow: 0 0 10px rgba(19, 62, 255, 0.526), 0 0 10px rgba(0, 0, 0, 0.526);
+  
+}
+@keyframes slowlight {
+  80%{
+    background-color: rgb(120, 199, 255);
+
+  }
+  100%{
+    background-color: rgb(44, 100, 255);
+  }
+}
+.lessons .lesson .lesson_info .lesson_name {
+  font-size: 30px;
 }
 .lessons .lesson .lesson_info div p {
   display: flex;
@@ -279,7 +293,7 @@
 
 }
 .lessons .lesson .lesson_info div:nth-child(1) p:nth-child(2){
-  font-size: 16px;
+  font-size: 20px;
 }
 .lessons .lesson .lesson_info div:nth-child(2){
   padding: 5px 0;
@@ -291,3 +305,60 @@
   text-transform: capitalize;
 }
 .lessons .lesson .lesson_info div:nth-child(2) p:nth-child(2){}
+
+
+
+.present{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background-color: #a8c6fe;
+  color: white;
+  
+}
+.present .up_qr {
+  text-align: center;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+  font-size: 2.5rem;
+}
+.present img{
+  position: relative;
+}
+.present .under_qr{
+  animation-name: ligting;
+  animation-duration: 4s;
+  text-align: center;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.disclamer{
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 11px;
+  color: #ff9f05;
+  font-weight: 600;
+}
+@keyframes ligting {
+  0%{
+    opacity: 1;
+  }
+  50%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+.errorLink {
+  color: red;
+  font-size: 12px;
+}

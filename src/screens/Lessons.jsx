@@ -1,38 +1,54 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { PiDoorOpen } from "react-icons/pi";
 import { PiDoorOpenBold } from "react-icons/pi";
 import { LuBookType } from "react-icons/lu";
 import { LuBookText } from "react-icons/lu";
 
-const Lessons = ({ boardLesson }) => {
-  console.log(boardLesson)
+const Lessons = ({id,idM, lesson,teacher,ltype,audience}) => {
+  const [lType,setLType] =useState(ltype.split("(")[1].split(")")[0])
+  console.log(id)
+  const numsObj = {
+    2: 1,
+    4: 2,
+    6: 3,
+    8: 4,
+    10: 5,
+    12: 6,
+    14: 7,
+    16: 8,
+  }
   return (
-    <div className='lessons'>
-      {
-        boardLesson.map((el, idx, array) => (
-          <div className={el.lesson_name == "Окно" ? "lesson empty" : "lesson"} style={{
+    <div 
+    className='lessons'
+    >
+          <div className={"" == "Окно" ? "lesson empty" : "lesson"} style={{
             animationName: "slowupLesson",
-            animationTimingFunction: "linear",
-            animationDelay: "0." + (idx * 2) + "s",
+            animationTimingFunction: "ease-in-out",
+            animationDelay: "0." + (numsObj[id]*2) + "s",
             animationDuration: "1s",
             animationFillMode: "forwards",
           }}>
             <div className="lesson_num">
-              <p>{idx+1}</p>
+              <p>{numsObj[id]}</p>
             </div>
-            <div className="lesson_info">
+            <div className="lesson_info" 
+            style={{
+              animationName: "slowlight",
+              animationTimingFunction: "linear",
+              animationDelay: "0." + (numsObj[id]) + "s",
+              animationDuration: "1s",
+              animationFillMode: "forwards",
+            }}>
               <div>
-                <p><LuBookText /> - Группа: <span> {el.group}</span></p>
-                <p>{el.lesson_name}</p>
+                <p><LuBookText /> Преподователь: <span>{teacher}</span></p>
+                <p className='lesson_name'>{lesson}</p>
               </div>
               <div>
-                <p><LuBookType />: {el.lesson_type}</p>
-                <p><PiDoorOpenBold />:  {el.Audience}</p>
+                <p><LuBookType />: {lType}</p>
+                <p><PiDoorOpenBold />: {audience}</p>
               </div>
             </div>
           </div>
-        ))
-      }
 
     </div>
   )

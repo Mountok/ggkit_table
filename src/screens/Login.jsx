@@ -1,44 +1,77 @@
 import React, { useEffect, useState } from 'react'
 import data from "../assets/data/data.json"
 import { useNavigate } from 'react-router-dom'
+import { MenuItem, Select, InputLabel, FormControl, Button } from '@mui/material';
+
 const Login = () => {
-    const navigation = useNavigate()
-    const [teachers,setTeachers] = useState(data)
-    const [currentId,setCurrentId] = useState(+localStorage.getItem("ggkit_table_current_id") || 0)
-    
+    const navigate = useNavigate()
+    const [groups, setGroups] = useState(Object.keys(data.groups))
+    const [currentGroup,setCurrentGroup] = useState(localStorage.getItem("ggkit_time_tsble_s") || "")
+    useEffect(()=>{
+        console.log(groups)
+    })
     const redirectToTimeTable = (e) => {
-        e.preventDefault()
-        localStorage.setItem("ggkit_table_current_id",currentId)
-        navigation("/"+currentId)
+        navigate("/table?id="+currentGroup)
     }
-    
+
+    const handleChange = (e) => {
+        e.preventDefault()
+        localStorage.setItem("ggkit_time_tsble_s",e.target.value)
+        setCurrentGroup(e.target.value)
+    }
+
     return (
         <div className='login_back'>
 
             <div className="login_title">
-                <h1>GGKIT <br />Расписание</h1>
+                <h1 
+                onClick={()=>navigate("/present")}
+                >GGKIT <br />Расписание</h1>
                 <div className="login_form">
                     <div className='form'>
-                        {teachers.teachers.length == 0 ? (
-                            <select name="teachers" id="teachers">
-                    
-                                <option id='teachers' value='0'>Пусто</option>
-                            </select>
+                        {groups.length == 0 ? (
+                            <FormControl fullWidth>
+
+                                <InputLabel id="demo-simple-select-label">Выберите группу</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={0}
+                                    label="Выберите преподователя"
+                                >
+                                    <MenuItem value={0}>Пусто</MenuItem>
+                                </Select>
+                            </FormControl>
 
                         ) : (
-                            <select value={currentId} onChange={(e)=>{setCurrentId(e.target.value)}} name="teachers" id="teachers">
-                            {
-                                teachers.teachers.map((idx,i)=>(
-                                    <option id="teachers"  value={i}>{idx.name}</option>
-                                ))
-}
-                            </select>
+
+                            <FormControl fullWidth>
+
+                                <InputLabel id="demo-simple-select-label">Выберите группу</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={currentGroup}
+                                    label="Выберите преподователя"
+                                    onChange={(e) => handleChange(e)}
+                                >
+                                    <MenuItem value="">
+                                        <em>Не выбрано</em>
+                                    </MenuItem>
+                                    {
+                                        groups.map((i,idx) => (
+                                            <MenuItem key={idx} value={idx}>{i.split("-")[1]+"-"+i.split("-")[2]}</MenuItem>
+                                        ))
+                                    }
+                                </Select>
+                            </FormControl>
                         )}
-                        
+
                         <br />
-                        <button onClick={(e)=>redirectToTimeTable(e)}>
-                            Войти
-                        </button>
+                        <Button size='large' onClick={(e) => redirectToTimeTable(e)} variant="outlined">Войти</Button>
+                        <p className='disclamer'>приложение находиться на стадии тестирования <br /> Перепроверяйте расписание))</p>
+                        <a  className='errorLink' href="https://docs.google.com/forms/d/e/1FAIpQLSeg91imAThjXbrDEi3E1ppIawd0B05ZX1N5gXRx-TCUqUljcA/viewform?usp=header">
+                        Возникла проблема? напишите.</a>
                     </div>
                 </div>
             </div>

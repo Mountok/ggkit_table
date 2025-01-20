@@ -1,29 +1,26 @@
 import './App.css'
-import Login from './screens/Login'
-
 import data from "./assets/data/data.json"
 import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import Login from './screens/Login'
 import TimeTable from './screens/TimeTable'
+import Present from './screens/Present'
 
 function App() {
-  const [teachersLen,setTeacherLen] = useState(data.teachers.length)
-  const [teachersNames,setTeachersNames] = useState([])
+  const [teachersLen,setTeacherLen] = useState()
+  const [groupsObj,setGroups] = useState(data)
   useEffect(()=>{
-    const arrayNames = []
-    for (let i = 0; i < teachersLen; i++) {
-      arrayNames.push( data.teachers[i].name)
-    }
-    setTeachersNames(arrayNames)
-
+      console.log(Object.keys(groupsObj.groups))
   },[])
+
 
   return (
     <>
       
     <Routes>
-      <Route path='/' element={<Login teachersLen={teachersLen} teachersNames={teachersNames} />} />
-      <Route path='/:id' element={<TimeTable/>} />
+      <Route path='/' element={<Login/>} />
+      <Route path='/table' element={<TimeTable/>} />
+      <Route path='/present' element={<Present/>} />
     </Routes>
 
       
